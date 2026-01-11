@@ -1,4 +1,5 @@
-# Social-to-Lead Conversational Agent
+# Social-to-Lead Agentic Workflow
+
 
 This project was built as part of a technical assignment for the Machine Learning Intern role at ServiceHive.
 
