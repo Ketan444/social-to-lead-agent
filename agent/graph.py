@@ -1,50 +1,57 @@
+import re
 from agent.intents import detect_intent
-from agent.rag import answer_from_knowledge
-from agent.tools import mock_lead_capture
+
+
+def extract_lead_info(user_input):
+    parts = [p.strip() for p in user_input.split(",")]
+
+    name = parts[0] if len(parts) > 0 else None
+    email = None
+    platform = None
+
+    email_match = re.search(r'[\w\.-]+@[\w\.-]+', user_input)
+    if email_match:
+        email = email_match.group(0)
+
+    platforms = {"instagram", "linkedin", "twitter", "facebook", "website"}
+    for word in user_input.lower().split():
+        if word.strip(",") in platforms:
+            platform = word.strip(",")
+
+    return name, email, platform
+
 
 def handle_message(user_input, state):
+    intent = detect_intent(user_input)
 
-    # Detect intent only once per flow
-    if state["intent"] is None:
-        state["intent"] = detect_intent(user_input)
-
-    intent = state["intent"]
-    lead = state["lead"]
-
-    # Step 1: Greeting
-    if intent == "greeting":
-        state["intent"] = None
-        return "Sure! I can help you with our pricing plans. What would you like to know?"
-
-    # Step 2: Knowledge Retrieval (RAG)
-    if intent == "product_query":
-        state["intent"] = None
-        return answer_from_knowledge(user_input)
-
-    # Step 3–5: High Intent → Lead Qualification → Tool Execution
     if intent == "high_intent":
+        state["intent"] = "high_intent"
+        return "Great! Please share your name, email, and preferred platform."
 
-        if lead["name"] is None:
-            return "Great! May I know your name?"
+    if state.get("intent") == "high_intent":
+        name, email, platform = extract_lead_info(user_input)
 
-        if lead["email"] is None:
-            return "Thanks! Could you please share your email?"
+        if name:
+            state["lead"]["name"] = name
+        if email:
+            state["lead"]["email"] = email
+        if platform:
+            state["lead"]["platform"] = platform
 
-        if lead["platform"] is None:
-            return "Which platform do you create content on? (YouTube, Instagram, etc.)"
+        missing = [
+            key for key, value in state["lead"].items()
+            if not value
+        ]
 
-        # All required details collected
-        mock_lead_capture(
-            lead["name"],
-            lead["email"],
-            lead["platform"]
+        if missing:
+            return f"Please provide your {', '.join(missing)}."
+
+        return (
+            f"Thanks {state['lead']['name']}! "
+            f"We have captured your details:\n"
+            f"📧 {state['lead']['email']}\n"
+            f"📱 {state['lead']['platform']}\n"
+            f"Our team will contact you shortly."
         )
 
-        # Reset state after lead capture
-        state["intent"] = None
-        state["lead"] = {"name": None, "email": None, "platform": None}
-
-        return "Thanks! Our team will reach out to you shortly."
-
-    return "Let me know how I can help you."
-
+    return "How can I help you today?"

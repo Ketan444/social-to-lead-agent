@@ -1,7 +1,9 @@
 from agent.memory import create_state
 from agent.graph import handle_message
+from agent.test_workflow import AutomatedTestingWorkflow
 
-def main():
+
+def run_chatbot():
     state = create_state()
     print("AutoStream Assistant (type 'exit' to quit)\n")
 
@@ -22,5 +24,19 @@ def main():
         response = handle_message(user_input, state)
         print("Bot:", response)
 
+
+def run_testing_tool():
+    workflow = AutomatedTestingWorkflow()
+    result = workflow.run("sample_data/sample_large_testing_data.csv")
+    print(result)
+
+
 if __name__ == "__main__":
-    main()
+    mode = input("Choose mode (chat/test): ").lower()
+
+    if mode == "chat":
+        run_chatbot()
+    elif mode == "test":
+        run_testing_tool()
+    else:
+        print("Invalid mode selected")

@@ -1,0 +1,4 @@
+{
+  "required_columns": ["name", "email"],
+  "check_nulls": true
+}

@@ -1,0 +1,41 @@
+{
+    "file": "sample_data/sample_large_testing_data.csv",
+    "total_rows": 100,
+    "total_columns": 6,
+    "dataset_preview": [
+        {
+            "id": 1,
+            "name": "Diya_1",
+            "email": "user1@college.edu",
+            "platform": "LinkedIn",
+            "test_score": 79,
+            "validation_status": "PASS"
+        },
+        {
+            "id": 2,
+            "name": "Arjun_2",
+            "email": "user2@outlook.com",
+            "platform": "Website",
+            "test_score": 93,
+            "validation_status": "PASS"
+        },
+        {
+            "id": 3,
+            "name": "Krishna_3",
+            "email": "user3@yahoo.com",
+            "platform": "Facebook",
+            "test_score": 82,
+            "validation_status": "PASS"
+        }
+    ],
+    "validation": {
+        "status": "FAIL",
+        "errors": [
+            "Null values found: 3"
+        ]
+    },
+    "action": {
+        "action": "log_errors",
+        "message": "Validation failed"
+    }
+}

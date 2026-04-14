@@ -1,52 +1,35 @@
-# Social-to-Lead Agentic Workflow
+# 🚀 Multi-Agent Workflow Platform
+### Social Lead Agent + Automated Data Validation & Testing Tool
 
+A **dual-workflow Python project** that combines:
 
-This project was built as part of a technical assignment for the Machine Learning Intern role at ServiceHive.
+- 💬 **Conversational Social-to-Lead Agent** for lead capture
+- 🧪 **Automated Testing Workflow** for CSV/JSON/XML validation
+- 📊 **Structured reporting system** with JSON reports + error logs
+- ⚡ **Optimized chatbox + validation engine**
+- 🧠 **Rule-based validation + smart lead extraction**
 
-The goal of this project is to build a simple, real-world conversational AI agent for a fictional SaaS product called **AutoStream**. The agent answers product-related questions, identifies high-intent users, and captures leads in a structured way.
-
-I intentionally kept the design simple and easy to explain, focusing on clarity, reliability, and real-world usability rather than over-engineering.
-
----
-
-## Product Overview – AutoStream
-
-AutoStream is a SaaS platform for automated video editing for content creators.
-
-### Plans
-**Basic Plan**
-- $29/month
-- 10 videos per month
-- 720p resolution
-
-**Pro Plan**
-- $79/month
-- Unlimited videos
-- 4K resolution
-- AI captions
-- 24/7 priority support
-
-### Policies
-- No refunds after 7 days
-- 24/7 support available only for Pro users
-
-All product information is stored locally and used by the agent while responding to user queries.
+This project demonstrates how a **conversational AI workflow can be extended into an event-driven software engineering testing platform**.
 
 ---
 
-## How the Agent Works
+# ✨ Features
 
-The agent follows a simple conversational flow:
+## 💬 1) Chat Workflow
+The chatbot acts like a **sales + lead-generation assistant**.
 
-1. Detects the user’s intent (greeting, product query, or high intent).
-2. Answers pricing and feature-related questions using a local knowledge base.
-3. Identifies high-intent users who want to sign up.
-4. Collects lead details step by step (name, email, platform).
-5. Calls a mock lead capture function only after all details are collected.
+### ✅ Capabilities
+- Intent detection
+- Smart lead extraction
+- Regex-based email parsing
+- Multi-turn memory
+- O(n) optimized routing
+- Professional lead confirmation response
 
-Conversation state is maintained across multiple turns to ensure a smooth lead capture experience.
+### 💬 Example Chat
+```text
+You: I want to buy your automated testing tool
+Bot: Great! Please share your name, email, and preferred platform.
 
----
-
-## Project Structure
-
+You: Ketan, ketanmalviya@gmail.com, Instagram
+Bot: Thanks Ketan! We have captured your details.
